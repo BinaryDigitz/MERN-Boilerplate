@@ -25,4 +25,4 @@ A boilerplate project to kickstart development with the MERN stack — MongoDB, 
 1. Clone the repository:
    ```bash
    git clone https://github.com/binaryDigitz/mern-boilerplate.git
-   cd mern-boilerplate
+   cd mern-boilerplater
