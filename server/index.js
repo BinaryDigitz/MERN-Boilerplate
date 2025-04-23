@@ -4,6 +4,8 @@ import cors from 'cors';
 import morgan from "morgan";
 import { JWT_SECRET } from "./config/env.js";
 import connectToDB from "./config/connectToDB.js";
+import authRouter from "./routes/auth.route.js";
+import errorHandler from './middlewares/errorHandler.js'
 
 
 
@@ -12,7 +14,7 @@ const app = express()
 // handle uncaughtexceptions in the app
 process.on('uncaughtException',(ex) =>{
     console.log('FATAL UNCAUGHT EXCEPTION DETECTED');
-    console.log('Exception', ex)
+    console.log('EXCEPTION', ex)
     
 })
 // handler no JWT_SECRET PROVIDED
@@ -24,7 +26,7 @@ if(!JWT_SECRET){
 
 // MIDDLEWARE
 app.use(cookieParser())
-app.cors(cors())
+app.use(cors())
 app.use(express.json())
 app.use(morgan('tiny'))
 app.use(express.urlencoded({ extended : false}))
@@ -41,9 +43,11 @@ app.get('/', (req, res) =>  res.json({ success: true, message: 'Hello world', st
 
 // Handle invalid URL
 app.get('*', (req, res) => res.json({ success:true, message: 'Invalid URL', statusCode: 404}))
+app.use('/api/auth', authRouter)
 
 
 // ERROR HANDLER
+app.use(errorHandler)
 
 // connect config files
 connectToDB()

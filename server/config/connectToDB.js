@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { MONGODB_URI, NODE_ENV, PORT } from "./env";
+import { MONGODB_URI, NODE_ENV, PORT } from "./env.js";
 import app from '../index.js'
 
 function connectToDB() {
