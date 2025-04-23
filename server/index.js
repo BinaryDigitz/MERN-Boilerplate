@@ -15,7 +15,6 @@ const app = express()
 process.on('uncaughtException',(ex) =>{
     console.log('FATAL UNCAUGHT EXCEPTION DETECTED');
     console.log('EXCEPTION', ex)
-    
 })
 // handler no JWT_SECRET PROVIDED
 if(!JWT_SECRET){
@@ -42,7 +41,7 @@ app.use('/image', express.static('image'))
 app.get('/', (req, res) =>  res.json({ success: true, message: 'Hello world', statusCode: 200}))
 
 // Handle invalid URL
-app.get('*', (req, res) => res.json({ success:true, message: 'Invalid URL', statusCode: 404}))
+// app.get('*', (req, res) => res.json({ success:true, message: 'Invalid URL', statusCode: 404}))
 app.use('/api/auth', authRouter)
 
 
